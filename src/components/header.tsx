@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Heart, User } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useAuth } from '../hooks/use-auth';
 import { ModeToggle } from './mode-toggle';
@@ -49,7 +49,7 @@ export function Header() {
 
                 <Link to="/auth">
                   <Button variant="default" size="sm">
-                    Sign In
+                    <User className="h-5 w-5" />
                   </Button>
                 </Link>
               </>

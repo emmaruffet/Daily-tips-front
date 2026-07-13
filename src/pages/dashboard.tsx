@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {
   Card,
@@ -56,6 +57,7 @@ interface ArticleFormData extends Omit<Article, 'category' | 'image_url'> {
   excerpt: string;
 }
 export function Dashboard() {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -92,7 +94,7 @@ export function Dashboard() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch('http://82.66.147.237:3000/articles');
+        const response = await fetch('http://localhost:3000/articles');
 
         if (!response.ok) {
           throw new Error('Erreur lors de la récupération des articles');
@@ -153,30 +155,29 @@ export function Dashboard() {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to update article');
+        throw new Error('Échec de la mise à jour');
       }
-
-      const updatedArticleData = await response.json(); 
-
-      const updatedArticle: Article = {
-        ...updatedArticleData, 
-        image_url: updatedArticleData.image || formData.image, 
-        category: { name: formData.category }, 
-      };
-
-      setArticles(
-        articles.map((article) => (article.id === formData.id ? updatedArticle : article))
+  
+      const updatedArticle = await response.json();
+  
+      // 🔥 Met à jour la liste des articles
+      setArticles((prevArticles) =>
+        prevArticles.map((article) =>
+          article.id === formData.id ? updatedArticle : article
+        )
       );
-
+  
+      // 🔥 Forcer un refetch dans ArticleDetail
+      navigate(`/article/${formData.id}`, { replace: true });
+  
       toast.success('Article mis à jour avec succès !');
       setIsEditDialogOpen(false);
     } catch (error) {
-      // ... error handling
+      toast.error('Erreur lors de la mise à jour');
     }
-  };
+  };  
 
 
   const handleCreate = async () => {

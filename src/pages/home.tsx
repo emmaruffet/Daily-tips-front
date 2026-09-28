@@ -16,7 +16,7 @@ export function Home() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await axios.get('http://192.168.1.106:3000/articles');
+        const response = await axios.get('http://strawberry.ruffet.org:3000/articles');
 
         // Vérification et assignation d'une catégorie par défaut
         const validArticles = response.data.map((article: Article) => ({

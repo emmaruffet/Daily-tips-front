@@ -29,8 +29,8 @@ export function Articles() {
     setError(null); // Réinitialiser les erreurs
     try {
       const url = categoryIdFromUrl 
-      ? `http://localhost:3000/articles?category=${categoryIdFromUrl}` 
-      : "http://localhost:3000/articles";
+      ? `http://strawberry.ruffet.org:3000/articles?category=${categoryIdFromUrl}` 
+      : "http://strawberry.ruffet.org:3000/articles";
           const response = await axios.get(url);
 
       if (Array.isArray(response.data)) {

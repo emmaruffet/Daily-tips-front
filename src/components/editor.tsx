@@ -32,7 +32,7 @@ const Editor: React.FC<EditorProps> = ({ onChange, initialContent }) => {
             class: ImageTool,
             config: {
               endpoints: {
-                byFile: "http://localhost:3000/upload", // Ton endpoint d'upload d'image
+                byFile: "http://strawberry.ruffet.org:3000/upload", // Ton endpoint d'upload d'image
               },
             },
           },

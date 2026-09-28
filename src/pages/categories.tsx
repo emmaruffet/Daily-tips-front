@@ -24,7 +24,7 @@ export function Categories() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://192.168.1.106:3000/categories');
+        const response = await axios.get('http://strawberry.ruffet.org:3000/categories');
         console.log(response.data);
 
         const categoriesWithDetails = response.data.map((category: any) => {

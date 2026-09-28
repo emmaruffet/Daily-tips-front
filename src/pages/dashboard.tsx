@@ -94,7 +94,7 @@ export function Dashboard() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch('http://localhost:3000/articles');
+        const response = await fetch('http://strawberry.ruffet.org:3000/articles');
 
         if (!response.ok) {
           throw new Error('Erreur lors de la récupération des articles');

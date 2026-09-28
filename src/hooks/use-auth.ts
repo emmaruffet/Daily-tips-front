@@ -29,7 +29,7 @@ export const useAuth = create<AuthState>((set, get) => ({
     set({ isLoading: true });
     try {
       console.log("Tentative de connexion avec:", { email, password });
-      const response = await axios.post('http://192.168.1.106:3000/login', { email, password });
+      const response = await axios.post('http://strawberry.ruffet.org:3000/login', { email, password });
       console.log("Réponse du serveur:", response.data);
 
       const { token } = response.data;
@@ -60,7 +60,7 @@ export const useAuth = create<AuthState>((set, get) => ({
     set({ isLoading: true });
     try {
       const response = await axios.post(
-        "http://192.168.1.106:3000/register",
+        "http://strawberry.ruffet.org:3000/register",
         { email, password },  // Pas besoin d'envoyer name ici
         { headers: { "Content-Type": "application/json" }, withCredentials: true }
       );
